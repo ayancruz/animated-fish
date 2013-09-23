@@ -1,8 +1,6 @@
-(function($){
-	  $.fn.swim = function(id_left, id_right) {
-			var that = this;
+function swim(element, id_left, id_right) {
+			var that = element;
 			
-			setInterval(function() {
 			var $face_left = that.add('#' + id_left);
 			var $face_right = that.add('#' + id_right);
 			
@@ -25,7 +23,9 @@
 			that.stop().animate({
 					top:  pos_top + 'px',
 					left: pos_left + 'px'
-				}, 3000);
-			}, 3000);
-		}
-})(jQuery);
+				}, 3000, function() {
+					setTimeout(function(){
+						swim(element, id_left, id_right);
+                }, 0);
+			});
+	}
